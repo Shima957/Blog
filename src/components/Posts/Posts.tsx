@@ -1,17 +1,35 @@
-import { Link } from '@chakra-ui/react';
+import { HStack, Box, Heading, Tag, Link, Divider } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { VFC } from 'react';
+import { blog } from '../../types/responseDataType';
+import DateFormat from '../../util/DateFormat';
 
-const Article = ({ blog }) => {
+type Props = {
+  blogs: blog[];
+};
+
+const Article: VFC<Props> = ({ blogs }) => {
   return (
-    <ul>
-      {blog.map((blog) => (
-        <li key={blog.id}>
-          <Link as={NextLink} href={`/blog/${blog.id}`}>
-            <a>{blog.title}</a>
-          </Link>
-        </li>
+    <Box mt={8}>
+      {blogs.map((blog) => (
+        <>
+          <Box key={blog.id}>
+            <HStack>
+              <Box as="time" dateTime={blog.createdAt}>
+                {DateFormat(blog.createdAt)}
+              </Box>
+              <Tag>{blog.category.name}</Tag>
+            </HStack>
+            <Heading size="lg" mt={2}>
+              <Link as={NextLink} href={`/blog/${blog.id}`}>
+                {blog.title}
+              </Link>
+            </Heading>
+          </Box>
+          <Divider mt={4} />
+        </>
       ))}
-    </ul>
+    </Box>
   );
 };
 
