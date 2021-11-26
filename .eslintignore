@@ -1,6 +1,7 @@
-build/
-public/
-**/node_modules/
+/build
+/public
+/.next
+**/node_modules
 **/*.min.js
 *.config.js
 *.config.ts
