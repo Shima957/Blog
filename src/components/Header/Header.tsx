@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Flex as="header" h="84px" boxShadow="base" alignItems="center">
+    <Flex as="header" h="88px" boxShadow="base" alignItems="center">
       <Container maxW="container.lg">
         <Flex justifyContent="space-between">
           <Heading size="lg">
@@ -45,7 +45,13 @@ const Header = () => {
             </MenuButton>
             <MenuList>
               {categories.map((category) => (
-                <MenuItem key={category.id}>{category.name}</MenuItem>
+                <Link
+                  as={NextLink}
+                  key={category.id}
+                  href={`/category/${category.name}`}
+                >
+                  <MenuItem>{category.name}</MenuItem>
+                </Link>
               ))}
             </MenuList>
           </Menu>

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import Footer from '../Footer/Footer';
 
 const PostsArea = styled.main`
-  min-height: calc(100vh - 84px - 70px);
+  min-height: calc(100vh - 88px - 88px);
   padding: 70px 0;
 `;
 
