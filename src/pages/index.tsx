@@ -1,20 +1,23 @@
 import Head from 'next/head';
 import { VFC } from 'react';
+import Pagination from '../components/Pagination/Pagination';
 import Posts from '../components/Posts/Posts';
 import { client } from '../libs/client';
 import { blog, cmsData } from '../types/responseDataType';
 
 type Props = {
   blogs: blog[];
+  totalCount: number;
 };
 
-const Home: VFC<Props> = ({ blogs }) => {
+const Home: VFC<Props> = ({ blogs, totalCount }) => {
   return (
     <>
       <Head>
         <title>ShimaBlo</title>
       </Head>
       <Posts blogs={blogs} />
+      {totalCount >= 5 ? <Pagination totalCount={totalCount} /> : null}
     </>
   );
 };
@@ -22,11 +25,15 @@ const Home: VFC<Props> = ({ blogs }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const blog: cmsData<blog[]> = await client.get({ endpoint: 'blog' });
+  const data: cmsData<blog[]> = await client.get({
+    endpoint: 'blog',
+    queries: { offset: 0, limit: 5 },
+  });
 
   return {
     props: {
-      blogs: blog.contents,
+      blogs: data.contents,
+      totalCount: data.totalCount,
     },
   };
 };

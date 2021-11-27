@@ -48,7 +48,7 @@ const Article: VFC<Props> = ({ blogs }) => {
             </BodyPreviwe>
             <Text fontWeight="bold">
               <Link as={NextLink} href={`/blog/${blog.id}`}>
-                Read More
+                Read More...
               </Link>
             </Text>
           </Stack>
