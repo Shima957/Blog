@@ -3,7 +3,7 @@ import {
   Stack,
   Box,
   Heading,
-  Tag,
+  Badge,
   Link,
   Divider,
   Text,
@@ -36,7 +36,7 @@ const Article: VFC<Props> = ({ blogs }) => {
               <Box as="time" dateTime={blog.createdAt}>
                 {DateFormat(blog.createdAt)}
               </Box>
-              <Tag>{blog.category.name}</Tag>
+              <Badge fontSize="sm">{blog.category.name}</Badge>
             </HStack>
             <Heading size="lg" mt={2}>
               <Link as={NextLink} href={`/blog/${blog.id}`}>

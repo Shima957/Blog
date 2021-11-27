@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import { blog } from '../../types/responseDataType';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Stack, HStack, Badge } from '@chakra-ui/react';
 import DateFormat from '../../util/DateFormat';
 
 type Props = {
@@ -10,11 +10,16 @@ type Props = {
 const PostDetail: VFC<Props> = ({ blog }) => {
   return (
     <Box>
-      <Heading>{blog.title}</Heading>
-      <Box as="time" dateTime={blog.createdAt}>
-        {DateFormat(blog.createdAt)}
-      </Box>
-      <Box dangerouslySetInnerHTML={{ __html: blog.body }} />
+      <Stack spacing={4}>
+        <Heading>{blog.title}</Heading>
+        <HStack>
+          <Box as="time" dateTime={blog.createdAt}>
+            {DateFormat(blog.createdAt)}
+          </Box>
+          <Badge fontSize="sm">{blog.category.name}</Badge>
+        </HStack>
+        <Box dangerouslySetInnerHTML={{ __html: blog.body }} />
+      </Stack>
     </Box>
   );
 };

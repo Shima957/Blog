@@ -1,5 +1,4 @@
 import {
-  Box,
   Flex,
   Heading,
   Link,
@@ -32,7 +31,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Box as="header" p={4} boxShadow="base">
+    <Flex as="header" h="84px" boxShadow="base" alignItems="center">
       <Container maxW="container.lg">
         <Flex justifyContent="space-between">
           <Heading size="lg">
@@ -52,7 +51,7 @@ const Header = () => {
           </Menu>
         </Flex>
       </Container>
-    </Box>
+    </Flex>
   );
 };
 
