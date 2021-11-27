@@ -8,21 +8,32 @@ import {
   MenuList,
   MenuItem,
   Button,
+  Container,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
-import { VFC } from 'react';
-import { categories } from '../../types/responseDataType';
-import BaseWith from '../Layout/BaseWith';
+import { useState, useEffect } from 'react';
+import { categories, cmsData } from '../../types/responseDataType';
+import { client } from '../../libs/client';
 
-type Props = {
-  categories: categories[];
-};
+const Header = () => {
+  const [categories, setCategories] = useState<categories[]>([]);
 
-const Header: VFC<Props> = ({ categories }) => {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data: cmsData<categories[]> = await client.get({
+        endpoint: 'categories',
+      });
+
+      setCategories([...data.contents]);
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <Box as="header" p={4} boxShadow="base">
-      <BaseWith>
+      <Container maxW="container.lg">
         <Flex justifyContent="space-between">
           <Heading size="lg">
             <Link as={NextLink} href={`/`}>
@@ -40,7 +51,7 @@ const Header: VFC<Props> = ({ categories }) => {
             </MenuList>
           </Menu>
         </Flex>
-      </BaseWith>
+      </Container>
     </Box>
   );
 };

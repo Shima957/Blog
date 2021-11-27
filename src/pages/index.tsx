@@ -1,26 +1,20 @@
 import Head from 'next/head';
 import { VFC } from 'react';
-import Header from '../components/Header/Header';
-import BaseWith from '../components/Layout/BaseWith';
-import Article from '../components/Posts/Posts';
+import Posts from '../components/Posts/Posts';
 import { client } from '../libs/client';
-import { blog, categories, cmsData } from '../types/responseDataType';
+import { blog, cmsData } from '../types/responseDataType';
 
 type Props = {
   blogs: blog[];
-  categories: categories[];
 };
 
-const Home: VFC<Props> = ({ blogs, categories }) => {
+const Home: VFC<Props> = ({ blogs }) => {
   return (
     <>
       <Head>
         <title>ShimaBlo</title>
       </Head>
-      <Header categories={categories} />
-      <BaseWith>
-        <Article blogs={blogs} />
-      </BaseWith>
+      <Posts blogs={blogs} />
     </>
   );
 };
@@ -28,13 +22,11 @@ const Home: VFC<Props> = ({ blogs, categories }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const blog: cmsData = await client.get({ endpoint: 'blog' });
-  const categories: cmsData = await client.get({ endpoint: 'categories' });
+  const blog: cmsData<blog[]> = await client.get({ endpoint: 'blog' });
 
   return {
     props: {
       blogs: blog.contents,
-      categories: categories.contents,
     },
   };
 };

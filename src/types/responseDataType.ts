@@ -1,5 +1,5 @@
-export type cmsData = {
-  contents: categories[] | blog[];
+export type cmsData<T> = {
+  contents: T;
   totalCount: number;
   offset: number;
   limit: number

@@ -10,7 +10,7 @@ type Props = {
 
 const Article: VFC<Props> = ({ blogs }) => {
   return (
-    <Box mt={8}>
+    <Box>
       {blogs.map((blog) => (
         <>
           <Box key={blog.id}>
