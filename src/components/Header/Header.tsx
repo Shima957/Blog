@@ -47,8 +47,8 @@ const Header = () => {
               {categories.map((category) => (
                 <Link
                   as={NextLink}
+                  href={`/blog/category/${category.id}`}
                   key={category.id}
-                  href={`/category/${category.name}`}
                 >
                   <MenuItem>{category.name}</MenuItem>
                 </Link>

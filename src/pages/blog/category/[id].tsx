@@ -1,10 +1,10 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { cmsData, blog } from '../../../types/responseDataType';
-import { client } from '../../../libs/client';
 import { ParsedUrlQuery } from 'querystring';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { client } from '../../../libs/client';
+import { blog, cmsData } from '../../../types/responseDataType';
 import { VFC } from 'react';
 import Posts from '../../../components/Posts/Posts';
-import Pagination from '../../../components/Pagination/Pagination';
+import Head from 'next/head';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -12,29 +12,26 @@ interface Params extends ParsedUrlQuery {
 
 type Props = {
   blogs: blog[];
-  totalCount: number;
 };
 
-const PER_PAGE = 5;
-
-const BlogPage: VFC<Props> = ({ blogs, totalCount }) => {
+const BlogCategory: VFC<Props> = ({ blogs }) => {
   return (
     <>
+      <Head>
+        <title>ShimaBlo</title>
+      </Head>
       <Posts blogs={blogs} />
-      <Pagination totalCount={totalCount} />
     </>
   );
 };
 
-export default BlogPage;
+export default BlogCategory;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: cmsData<blog[]> = await client.get({ endpoint: 'blog' });
-  const range = (start, end) =>
-    [...Array(end - start + 1)].map((_, i) => start + i);
 
-  const paths = range(1, Math.ceil(data.totalCount / PER_PAGE)).map(
-    (data) => `/blog/page/${data}`
+  const paths = data.contents.map(
+    (content) => `/blog/category/${content.category.id}`
   );
 
   return { paths, fallback: false };
@@ -46,13 +43,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   const { id } = context.params;
   const data: cmsData<blog[]> = await client.get({
     endpoint: 'blog',
-    queries: { offset: (Number(id) - 1) * 5, limit: 5 },
+    queries: { filters: `category[equals]${id}` },
   });
+
+  const category = data.contents.map((content) => content.category.name);
 
   return {
     props: {
       blogs: data.contents,
-      totalCount: data.totalCount,
+      category: category,
     },
   };
 };

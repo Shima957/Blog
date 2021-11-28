@@ -36,7 +36,11 @@ const Article: VFC<Props> = ({ blogs }) => {
               <Box as="time" dateTime={blog.createdAt}>
                 {DateFormat(blog.createdAt)}
               </Box>
-              <Badge fontSize="sm">{blog.category.name}</Badge>
+              <Badge fontSize="sm" _hover={{ bgColor: 'gray.200' }}>
+                <Link as={NextLink} href={`/blog/category/${blog.category.id}`}>
+                  {blog.category.name}
+                </Link>
+              </Badge>
             </HStack>
             <Heading size="lg" mt={2}>
               <Link as={NextLink} href={`/blog/${blog.id}`}>
