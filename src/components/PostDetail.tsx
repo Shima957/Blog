@@ -1,7 +1,7 @@
 import { VFC } from 'react';
-import { blog } from '../../types/responseDataType';
+import { blog } from '../types/responseDataType';
 import { Box, Heading, Stack, HStack, Badge } from '@chakra-ui/react';
-import DateFormat from '../../util/DateFormat';
+import DateFormat from '../util/DateFormat';
 
 type Props = {
   blog: blog;

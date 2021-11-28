@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { client } from '../../../libs/client';
 import { blog, cmsData } from '../../../types/responseDataType';
 import { VFC } from 'react';
-import Posts from '../../../components/Posts/Posts';
+import Posts from '../../../components/Posts';
 import Head from 'next/head';
 
 interface Params extends ParsedUrlQuery {

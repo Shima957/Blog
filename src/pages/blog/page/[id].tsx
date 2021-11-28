@@ -3,8 +3,8 @@ import { cmsData, blog } from '../../../types/responseDataType';
 import { client } from '../../../libs/client';
 import { ParsedUrlQuery } from 'querystring';
 import { VFC } from 'react';
-import Posts from '../../../components/Posts/Posts';
-import Pagination from '../../../components/Pagination/Pagination';
+import Posts from '../../../components/Posts';
+import Pagination from '../../../components/Pagination';
 
 interface Params extends ParsedUrlQuery {
   id: string;

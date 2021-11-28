@@ -4,7 +4,7 @@ import { client } from '../../libs/client';
 import { cmsData, blog } from '../../types/responseDataType';
 import { ParsedUrlQuery } from 'querystring';
 import { VFC } from 'react';
-import PostDetail from '../../components/Posts/PostDetail';
+import PostDetail from '../../components/PostDetail';
 
 interface Params extends ParsedUrlQuery {
   id: string;

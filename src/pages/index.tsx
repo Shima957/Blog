@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { VFC } from 'react';
-import Pagination from '../components/Pagination/Pagination';
-import Posts from '../components/Posts/Posts';
+import Pagination from '../components/Pagination';
+import Posts from '../components/Posts';
 import { client } from '../libs/client';
 import { blog, cmsData } from '../types/responseDataType';
 
@@ -15,6 +15,7 @@ const Home: VFC<Props> = ({ blogs, totalCount }) => {
     <>
       <Head>
         <title>ShimaBlo</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
       <Posts blogs={blogs} />
       {totalCount >= 5 ? <Pagination totalCount={totalCount} /> : null}

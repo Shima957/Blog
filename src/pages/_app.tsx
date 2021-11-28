@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import Layout from '../components/Layout/Layout';
+import Layout from '../components/Layout';
 import { AppProps } from 'next/dist/shared/lib/router/router';
 
 const App = ({ Component, pageProps }: AppProps) => {

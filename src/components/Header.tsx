@@ -16,8 +16,8 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
 import { useState, useEffect } from 'react';
-import { categories, cmsData } from '../../types/responseDataType';
-import { client } from '../../libs/client';
+import { categories, cmsData } from '../types/responseDataType';
+import { client } from '../libs/client';
 
 const Header = () => {
   const { toggleColorMode } = useColorMode();

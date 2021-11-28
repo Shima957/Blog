@@ -1,8 +1,8 @@
 import { Container } from '@chakra-ui/react';
 import { FC } from 'react';
-import Header from '../Header/Header';
+import Header from './Header';
 import styled from '@emotion/styled';
-import Footer from '../Footer/Footer';
+import Footer from './Footer';
 
 const PostsArea = styled.section`
   min-height: calc(100vh - 88px - 88px);

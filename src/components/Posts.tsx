@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { VFC } from 'react';
-import { blog } from '../../types/responseDataType';
-import DateFormat from '../../util/DateFormat';
+import { blog } from '../types/responseDataType';
+import DateFormat from '../util/DateFormat';
 import styled from '@emotion/styled';
 
 type Props = {
