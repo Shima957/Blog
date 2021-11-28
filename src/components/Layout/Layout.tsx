@@ -4,19 +4,21 @@ import Header from '../Header/Header';
 import styled from '@emotion/styled';
 import Footer from '../Footer/Footer';
 
-const PostsArea = styled.main`
+const PostsArea = styled.section`
   min-height: calc(100vh - 88px - 88px);
   padding: 70px 0;
 `;
 
-const Layout: FC = ({ children }) => (
-  <>
-    <Header />
-    <Container maxW="container.lg" as="main">
-      <PostsArea>{children}</PostsArea>
-    </Container>
-    <Footer />
-  </>
-);
+const Layout: FC = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <Container maxW="container.lg" as="main">
+        <PostsArea>{children}</PostsArea>
+      </Container>
+      <Footer />
+    </>
+  );
+};
 
 export default Layout;

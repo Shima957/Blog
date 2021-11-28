@@ -3,10 +3,11 @@ import {
   Stack,
   Box,
   Heading,
-  Badge,
+  Tag,
   Link,
   Divider,
   Text,
+  useColorMode,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { VFC } from 'react';
@@ -27,20 +28,29 @@ const BodyPreviwe = styled.p`
 `;
 
 const Article: VFC<Props> = ({ blogs }) => {
+  const { colorMode } = useColorMode();
+
   return (
-    <Box>
+    <>
       {blogs.map((blog) => (
-        <Box key={blog.id} mb={8}>
+        <Box key={blog.id} mb={8} as="article">
           <Stack>
             <HStack>
               <Box as="time" dateTime={blog.createdAt}>
                 {DateFormat(blog.createdAt)}
               </Box>
-              <Badge fontSize="sm" _hover={{ bgColor: 'gray.200' }}>
+              <Tag
+                fontSize="sm"
+                _hover={
+                  colorMode === 'light'
+                    ? { bgColor: 'gray.200' }
+                    : { bgColor: 'gray.700' }
+                }
+              >
                 <Link as={NextLink} href={`/blog/category/${blog.category.id}`}>
                   {blog.category.name}
                 </Link>
-              </Badge>
+              </Tag>
             </HStack>
             <Heading size="lg" mt={2}>
               <Link as={NextLink} href={`/blog/${blog.id}`}>
@@ -59,7 +69,7 @@ const Article: VFC<Props> = ({ blogs }) => {
           <Divider mt={4} />
         </Box>
       ))}
-    </Box>
+    </>
   );
 };
 

@@ -1,12 +1,21 @@
-import { Flex, Link, Container, Text, Stack } from '@chakra-ui/react';
+import {
+  Flex,
+  Link,
+  Container,
+  Text,
+  Stack,
+  useColorMode,
+} from '@chakra-ui/react';
 
 const Footer = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <Flex
       as="footer"
       h="88px"
       borderTop="1px"
-      borderColor="gray.200"
+      borderColor={colorMode === 'light' ? 'gray.200' : 'gray.600'}
       alignItems="center"
     >
       <Container maxW="container.lg">
