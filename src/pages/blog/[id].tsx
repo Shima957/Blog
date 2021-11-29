@@ -1,10 +1,12 @@
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { client } from '../../libs/client';
 import { cmsData, blog } from '../../types/responseDataType';
 import { ParsedUrlQuery } from 'querystring';
 import { VFC } from 'react';
 import PostDetail from '../../components/PostDetail';
+import HeadTempalte from '../../components/HeadTemplate';
+import { useRouter } from 'next/router';
+import { createOgImage } from '../../util/createOgImage';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -15,11 +17,21 @@ type Props = {
 };
 
 const BlogId: VFC<Props> = ({ blog }) => {
+  const router = useRouter();
+
+  const { ogImageUrl } = createOgImage(
+    process.env.NEXT_PUBLIC_BASE_IMAGE_URL,
+    blog.title
+  );
+
   return (
     <>
-      <Head>
-        <title>{blog.title} ― ShimaBlo</title>
-      </Head>
+      <HeadTempalte
+        pageTitle={`${blog.title} - ShimaBlo`}
+        pageUrl={decodeURI(router.asPath)}
+        pageImg={ogImageUrl}
+        pageDescription={blog.description}
+      />
       <PostDetail blog={blog} />
     </>
   );

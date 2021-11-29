@@ -17,6 +17,7 @@ export type categories = {
 export type blog = {
   id: string;
   createdAt: string;
+  description: string;
   updatedAt: string;
   publishedAt: string;
   revisedAt: string;
