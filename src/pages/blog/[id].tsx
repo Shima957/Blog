@@ -7,6 +7,7 @@ import PostDetail from '../../components/PostDetail';
 import HeadTempalte from '../../components/HeadTemplate';
 import { useRouter } from 'next/router';
 import { createOgImage } from '../../util/createOgImage';
+import { isDraft } from '../../util/typeGuard';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -43,16 +44,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const data: cmsData<blog[]> = await client.get({ endpoint: 'blog' });
   const paths = data.contents.map((content) => `/blog/${content.id}`);
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (
   context
 ) => {
   const { id } = context.params;
+
+  const draftKey = isDraft(context.previewData)
+    ? { draftKey: context.previewData.draftKey }
+    : {};
+
   const data: blog = await client.get({
     endpoint: 'blog',
     contentId: id,
+    queries: draftKey,
   });
 
   return {
