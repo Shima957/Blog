@@ -8,7 +8,7 @@ import HeadTempalte from '../../components/HeadTemplate';
 import { useRouter } from 'next/router';
 import { createOgImage } from '../../util/createOgImage';
 import { isDraft } from '../../util/typeGuard';
-import Custom404 from '../404';
+import ErrorPage from '../../components/ErrorPage';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -27,7 +27,7 @@ const BlogId: VFC<Props> = ({ blog }) => {
   );
 
   if (!blog) {
-    return <Custom404 />;
+    return <ErrorPage />;
   }
 
   return (
