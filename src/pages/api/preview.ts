@@ -1,7 +1,8 @@
-import { NextApiHandler } from "next";
+import { NextApiResponse, NextApiRequest } from "next";
 import { client } from "../../libs/client";
 
-const preview: NextApiHandler = async (req, res) => {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.id) {
     return res.status(404).end()
   }
@@ -24,5 +25,3 @@ const preview: NextApiHandler = async (req, res) => {
   res.writeHead(307, { Location: `/blog/${content.id}` })
   res.end('Preview mode enabled')
 }
-
-export default preview
