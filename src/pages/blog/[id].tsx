@@ -8,6 +8,7 @@ import HeadTempalte from '../../components/HeadTemplate';
 import { useRouter } from 'next/router';
 import { createOgImage } from '../../util/createOgImage';
 import { isDraft } from '../../util/typeGuard';
+import Custom404 from '../404';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -24,6 +25,10 @@ const BlogId: VFC<Props> = ({ blog }) => {
     process.env.NEXT_PUBLIC_BASE_IMAGE_URL,
     blog.title
   );
+
+  if (!blog) {
+    return <Custom404 />;
+  }
 
   return (
     <>
@@ -61,10 +66,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
     contentId: params.id,
     queries: draftKey,
   });
-
-  if (!data) {
-    return { notFound: true };
-  }
 
   return {
     props: {
