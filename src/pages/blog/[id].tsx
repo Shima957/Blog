@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   const data: blog = await client.get({
     endpoint: 'blog',
     contentId: id,
-    queries: draftKey,
+    queries: { draftKey: draftKey as string },
   });
 
   return {
