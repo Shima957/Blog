@@ -50,16 +50,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (
   context
 ) => {
-  const { id } = context.params;
+  const { params, previewData } = context;
 
-  const draftKey = isDraft(context.previewData)
-    ? { draftKey: context.previewData.draftKey }
+  const draftKey = isDraft(previewData)
+    ? { draftKey: previewData.draftKey }
     : {};
 
   const data: blog = await client.get({
     endpoint: 'blog',
-    contentId: id,
-    queries: { draftKey: draftKey as string },
+    contentId: params.id,
+    queries: draftKey,
   });
 
   return {
