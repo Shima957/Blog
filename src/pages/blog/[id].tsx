@@ -62,6 +62,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
     queries: draftKey,
   });
 
+  if (!data) {
+    return { notFound: true };
+  }
+
   return {
     props: {
       blog: data,
