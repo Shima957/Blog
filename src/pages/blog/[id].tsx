@@ -49,21 +49,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const data: cmsData<blog[]> = await client.get({ endpoint: 'blog' });
   const paths = data.contents.map((content) => `/blog/${content.id}`);
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (
   context
 ) => {
-  const { params, previewData } = context;
+  const { id } = context.params;
 
-  const draftKey = isDraft(previewData)
-    ? { draftKey: previewData.draftKey }
+  const draftKey = isDraft(context.previewData)
+    ? { draftKey: context.previewData.draftKey }
     : {};
 
   const data: blog = await client.get({
     endpoint: 'blog',
-    contentId: params.id,
+    contentId: id,
     queries: draftKey,
   });
 

@@ -6,7 +6,7 @@ const ErrorPage = () => {
     <>
       <Stack spacing={8}>
         <Heading as="h1" size="xl">
-          Not Found
+          404 Not Found
         </Heading>
         <Text fontSize="lg">
           Sorry, but we couldn’t find the page you wanted.
@@ -22,4 +22,5 @@ const ErrorPage = () => {
     </>
   );
 };
+
 export default ErrorPage;
