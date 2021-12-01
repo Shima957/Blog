@@ -41,7 +41,7 @@ const BlogId: VFC<Props> = ({ blog, draftKey }) => {
         pageImg={ogImageUrl}
         pageDescription={blog.description}
       />
-      {draftKey && <PreviewAnnounce />}
+      {draftKey ? <PreviewAnnounce /> : null}
       <Box pt={20}>
         <PostDetail blog={blog} />
       </Box>
