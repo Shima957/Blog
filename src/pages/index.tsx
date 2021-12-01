@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination';
 import Posts from '../components/Posts';
 import { client } from '../libs/client';
 import { blog, cmsData } from '../types/responseDataType';
+import { Box } from '@chakra-ui/react';
 
 type Props = {
   blogs: blog[];
@@ -19,8 +20,10 @@ const Home: VFC<Props> = ({ blogs, totalCount }) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
-      <Posts blogs={blogs} />
-      {totalCount >= 5 ? <Pagination totalCount={totalCount} /> : null}
+      <Box pt={20}>
+        <Posts blogs={blogs} />
+        {totalCount >= 5 ? <Pagination totalCount={totalCount} /> : null}
+      </Box>
     </>
   );
 };

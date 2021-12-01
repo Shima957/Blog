@@ -9,6 +9,8 @@ import { useRouter } from 'next/router';
 import { createOgImage } from '../../util/createOgImage';
 import { isDraft } from '../../util/typeGuard';
 import ErrorPage from '../../components/ErrorPage';
+import PreviewAnnounce from '../../components/PreviewAnnounce';
+import { Box } from '@chakra-ui/layout';
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -16,9 +18,10 @@ interface Params extends ParsedUrlQuery {
 
 type Props = {
   blog: blog;
+  draftKey: { draftKey: string } | { draftKey?: undefined };
 };
 
-const BlogId: VFC<Props> = ({ blog }) => {
+const BlogId: VFC<Props> = ({ blog, draftKey }) => {
   const router = useRouter();
 
   const { ogImageUrl } = createOgImage(
@@ -38,7 +41,10 @@ const BlogId: VFC<Props> = ({ blog }) => {
         pageImg={ogImageUrl}
         pageDescription={blog.description}
       />
-      <PostDetail blog={blog} />
+      {draftKey && <PreviewAnnounce />}
+      <Box pt={20}>
+        <PostDetail blog={blog} />
+      </Box>
     </>
   );
 };
@@ -70,6 +76,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   return {
     props: {
       blog: data,
+      draftKey: draftKey,
     },
   };
 };

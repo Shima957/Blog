@@ -6,7 +6,6 @@ import Footer from './Footer';
 
 const PostsArea = styled.section`
   min-height: calc(100vh - 88px - 88px);
-  padding: 70px 0;
 `;
 
 const Layout: FC = ({ children }) => {
